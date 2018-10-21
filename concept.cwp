@@ -46,7 +46,7 @@ class:x; // sets class of content to draw to x
 content: $top% $left% $bottom% $right%;
 
 // this would not draw anything because these values were automatically set to NULL the moment they were defined
-// % is suppoused to be a unit of measurement, values would have to be restricted as alpha characters [a-z][A-Z]
+// % is suppoused to be a unit of measurement, values would have to be restricted as alphanumeric characters [a-z][A-Z][0-9]
 
 
 // being able to define all rulesets globally would have the added benefit of cascading these rulesets to all of these web pages
@@ -55,15 +55,114 @@ content: $top% $left% $bottom% $right%;
 website.cwp
 [contents]
 ...
-index.cwp {...}
-aboutme.cwp{...}
+index {...}
+aboutme {...}
 
-// being able to define entire webpages, declare rules globally, locally and per element.
+// being able to define entire webpages, declare rules globally, locally and per element is an amazing touch but we can add the cherry on top
 
-// not satisfied? how about (a) rule(s) that only applies to a single piece of content getting drawn?
+// how about we add (a) rule(s) that only applies to a single piece of content getting drawn?
 rule:"...";
 // this would be similar to the style="" attrib in html, but in this context it complets the recursive stack down to each object getting rendered
 rule:"color:#FFF; stroke:#000";
 content: "text with a stroke" 90% 50% 10% 50%;
 
+// if we were to add links referring to these rulesets then the links would possibly look like this
+
+content-link:rule("index");
+
 // that is so far exactly what I can think of in terms of converting html structures into cwp structures
+
+// another thing to consider is that if an elements rules get overwritten by another element with the exact same name
+
+element {
+ rule1: yes;
+ rule2: no;
+}
+element {
+ rule2: no;
+}
+// then the elemnt will not be completly overwritten, but cascaded
+// rule1: yes;
+// rule2: no;
+
+// on the subject of a possible scripting language I have an idea to specifiy the value as an element
+
+$value {...}
+
+// what about a function that has no return value? how about this
+$ {...}
+
+// the scripting language can be placed anywhere, but where it's placed will change weather or not it gets loaded into what element
+$1 {...}
+index {
+$2 {...}
+// will load $1 and $2
+}
+aboutme {
+$3 {...}
+// will load $1 and $3
+}
+// functions can also be called within functions
+$1 {
+ $2 {
+ }
+}
+// functions can include parameters
+$1($2, $3) {
+
+}
+// functions can refer to values anywhere it cascades from
+$1 {...}
+index {
+ $2 {
+ $value = $1;
+ }
+}
+aboutme {
+ $3 {
+ $value = $1;
+ }
+}
+// one exeption to this rule is server side code which must not be shared to the client for security reasons. make the value private
+$1 {...}
+private $safe {}
+index {
+ $2 {
+ $value = $1;
+ }
+}
+aboutme {
+ $3 {
+ $value = $1;
+ }
+}
+// private functions act perfectly normal on the server side, on the client side however, these functions do not get sent under any circumstances
+// if you wish send the output of these private functions over to the client side, you must store them outside a private function
+
+// we've initalized a function, so how do you set one? here's how
+$1 {
+ 1;
+}
+// $1 now equals 1. you can do this for any datatype
+$1 {
+ break;
+ 1;
+}
+// $1 equals NULL because you forced the function to stop before it set it to 1
+$1 {
+ "string";
+}
+// strings which is an array of a char $1[0] equals 's'
+$1 {
+ 10 1 2 3 4 5 6;
+}
+// arrays: $1[0] equals 10
+$1 {
+ 1.00;
+}
+// floats
+
+// in the near future we plan to add loops, conditionals and all sorts of basic stuff
+// in the farther, but still close future, we will give this scripting language the abillity to add rulesets to wherever the function is located at
+// we also plan to add the abillity to import libraries with the CWP file that can explore functionallity outside the confines of the file it inhabiats
+ // this would allow you to modifiy databases, use machine learning algorithims and basically whatever else you want to use for your website
