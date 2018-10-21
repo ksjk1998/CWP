@@ -1,0 +1,69 @@
+content-text:"header";
+h1{
+// this is an idea for how to add content to cwp
+content: "header" 0% 50% 100% 50%;
+content: "footer" 100% 50% 0% 50%;
+
+// alternatively you can use
+content-text: "header";
+// and
+content-position: 0% 50% 100% 50%;
+// you can even reproduce the same content in a different position but not the same position with different content cause that would be stupid
+// content-position: 0% 50% 10% 50%
+// I dont want to do that though, maybe I want to do it to an h2 instead, not an h1 because that might be confusing. how about this as an idea
+}
+
+// see what I just did in this element ruleset? I just set the position of the rule that would be considered a "parent" of the ruleset referred to on line 1. I think that's a cool idea
+h2 {
+content-position: 0% 50% 10% 50%;
+// now, since the other content definition is contained in the h1 ruleset, maybe we have a global ruleset that this ruleset can adopt. hence the first like of code
+}
+
+// perhaps the content doesn't have to be text, maybe it can be other forms of media
+content-image: url(x) /* or */ file(x);
+content-audio: url(x) /* or */ file(x);
+content-video: url(x) /* or */ file(x);
+content-svg: url(x) /* or */ file(x);
+
+// it would instead look like this on the content rule
+// content:url(x) /* or */ file(x) 0px 0px 0px 0px;
+
+// links? that's ezpz
+// content:"my link" url(x) 50%
+content-text:"my link";
+content-link:url(x);
+content-position: 50%;
+
+// but what about UI? How about we introduce UI as a datatype?
+content-UI: UI(textbox);
+
+// other ideas for rulesets
+id:x; // sets id of content to draw to x
+class:x; // sets class of content to draw to x
+
+// another idea is to add values in CWP directly to rulesets
+
+content: $top% $left% $bottom% $right%;
+
+// this would not draw anything because these values were automatically set to NULL the moment they were defined
+// % is suppoused to be a unit of measurement, values would have to be restricted as alpha characters [a-z][A-Z]
+
+
+// being able to define all rulesets globally would have the added benefit of cascading these rulesets to all of these web pages
+// but how about this?
+
+website.cwp
+[contents]
+...
+index.cwp {...}
+aboutme.cwp{...}
+
+// being able to define entire webpages, declare rules globally, locally and per element.
+
+// not satisfied? how about (a) rule(s) that only applies to a single piece of content getting drawn?
+rule:"...";
+// this would be similar to the style="" attrib in html, but in this context it complets the recursive stack down to each object getting rendered
+rule:"color:#FFF; stroke:#000";
+content: "text with a stroke" 90% 50% 10% 50%;
+
+// that is so far exactly what I can think of in terms of converting html structures into cwp structures
