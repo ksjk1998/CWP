@@ -16,7 +16,7 @@ content-position: 0% 50% 100% 50%;
 // see what I just did in this element ruleset? I just set the position of the rule that would be considered a "parent" of the ruleset referred to on line 1. I think that's a cool idea
 h2 {
 content-position: 0% 50% 10% 50%;
-// now, since the other content definition is contained in the h1 ruleset, maybe we have a global ruleset that this ruleset can adopt. hence the first like of code
+// now, since the other content definition is contained in the h1 ruleset, maybe we have a global ruleset that this ruleset can adopt. hence the first line of code
 }
 
 // perhaps the content doesn't have to be text, maybe it can be other forms of media
