@@ -4,7 +4,7 @@
 		       #\tab #\rubout #\linefeed
 		       #\page #\return))
 (defun split-semicolon (string)
-  "splits the string where it finds a semicolon, and strips the resulting strings of whitespace"
+  "splits the string where it finds a semicolon"
   (let ((string-list ()))
     (dolist (x (split-sequence:split-sequence #\; string))
       (setq string-list (cons (string-trim *whitespace* x) string-list)))
