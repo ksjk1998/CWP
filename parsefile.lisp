@@ -1,3 +1,4 @@
+(require 'split-sequence)
 (print (read-file "default.cwp"))
 (defvar *whitespace* '(#\space #\newline #\backspace
 		       #\tab #\rubout #\linefeed
@@ -9,7 +10,7 @@
       (setq string-list (cons (string-trim *whitespace* x) string-list)))
     string-list))
 (defun strip-empty-strings (string-list)
-  (remove-if #'(lambda (string) (string= string "")) string-list))
+  (remove #'(lambda (string) (string= string "")) string-list))
 (strip-empty-strings (split-semicolon
 		      "one-more; and-another; and-another-rule; yet-another-rule; another-rule; rule;"))
 (quit)
