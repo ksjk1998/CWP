@@ -8,9 +8,10 @@
   (let ((string-list ()))
     (dolist (x (split-sequence:split-sequence #\; string))
       (setq string-list (cons (string-trim *whitespace* x) string-list)))
-    string-list))
+    (reverse string-list)))
 (defun strip-empty-strings (string-list)
-  (remove #'(lambda (string) (string= string "")) string-list))
-(strip-empty-strings (split-semicolon
-		      "one-more; and-another; and-another-rule; yet-another-rule; another-rule; rule;"))
+  (remove-if #'(lambda (string) (string= string "")) string-list))
+(strip-empty-strings
+ (split-semicolon
+	"one-more; and-another; and-another-rule; yet-another-rule; another-rule; rule;"))
 (quit)
