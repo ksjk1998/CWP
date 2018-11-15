@@ -1,4 +1,5 @@
-(require 'split-sequence)
+(load "split-sequence.lisp")
+(load "writefile.lisp")
 (print (read-file "default.cwp"))
 (defvar *whitespace* '(#\space #\newline #\backspace
 		       #\tab #\rubout #\linefeed
@@ -11,7 +12,7 @@
     (reverse string-list)))
 (defun strip-empty-strings (string-list)
   (remove-if #'(lambda (string) (string= string "")) string-list))
-(strip-empty-strings
+(print (strip-empty-strings
  (split-semicolon
-	"one-more; and-another; and-another-rule; yet-another-rule; another-rule; rule;"))
+	"one-more; \nand-another; and-another-rule; yet-another-rule; another-rule; rule;")))
 (quit)
