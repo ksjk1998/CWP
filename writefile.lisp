@@ -1,10 +1,10 @@
 (defun read-file (filename) 
- (setq lines '(filename))
+ (let (lines) (setq lines (cons filename lines))
   (with-open-file (stream filename)
     (do ((line (read-line stream nil)(read-line stream nil)))
      ((null line))
      (push line (cdr (last lines)))))
-  lines)
+  lines))
 
 ; will be implemented in a way that runs for the first time you execute the server
 ;(with-open-file (str "/etc/default.cwp"
