@@ -31,7 +31,7 @@
                     (push (strip-empty-strings (split-semicolon x)) rule-list))
                   (reverse rule-list)))
             (dolist (z y)
-	      (push (strip-empty-strings (split-colon z)) colon-list)))
+	      (push (strip-empty-strings (reverse(split-colon-and-reverse z))) colon-list)))
           (reverse colon-list)))
 
 (quit)
