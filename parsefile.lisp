@@ -25,13 +25,19 @@
 (defun strip-empty-strings (string-list)
   (remove-if #'(lambda (string) (string= string "")) string-list))
 
-(print (let ((colon-list nil))
-     (dolist (y (let ((rule-list nil))
-                  (dolist (x (read-file "default.cwp"))
-                    (push (strip-empty-strings (split-semicolon x)) rule-list))
-                  (reverse rule-list)))
-            (dolist (z y)
-	      (push (strip-empty-strings (reverse(split-colon-and-reverse z))) colon-list)))
-          (reverse colon-list)))
+(defun do-semicolon (l)
+  (let ((rule-list nil))
+    (dolist (x l)
+      (push (strip-empty-strings (split-semicolon x)) rule-list))
+    (reverse rule-list)))
+
+(defun do-colon (l)
+  (let ((colon-list nil))
+    (dolist (y (do-semicolon l))
+      (dolist (z y)
+        (push (strip-empty-strings (reverse(split-colon-and-reverse z))) colon-list)))
+    (reverse colon-list)))
+
+(print (do-colon (read-file "default.cwp")))
 
 (quit)
