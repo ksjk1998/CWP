@@ -11,12 +11,16 @@
       (setq string-list (cons (string-trim *whitespace* x) string-list)))
     (reverse string-list)))
 
-(defun split-colon (string)
-  "copied someone elses homework and changed one value, needs improvment"
+(defun split-colon-and-reverse (string)
+  "splits a string at every colon and returns a reversed list of results"
   (let ((string-list ()))
     (dolist (x (split-sequence:split-sequence #\: string))
       (setq string-list (cons (string-trim *whitespace* x) string-list)))
-    (reverse string-list)))
+    string-list))
+
+(defun after-last-colon (string)
+  "returns the text after the last colon in a string"
+  (car (split-colon string)))
 
 (defun strip-empty-strings (string-list)
   (remove-if #'(lambda (string) (string= string "")) string-list))
