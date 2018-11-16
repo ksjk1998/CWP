@@ -1,5 +1,5 @@
 (defun read-file (filename) 
- (let (lines) (setq lines (cons filename nil))
+ (let ((lines (cons filename nil))) 
   (with-open-file (stream filename)
     (do ((line (read-line stream nil)(read-line stream nil)))
      ((null line))
