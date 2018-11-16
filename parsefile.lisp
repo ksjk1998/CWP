@@ -20,7 +20,18 @@
 
 (defun after-last-colon (string)
   "returns the text after the last colon in a string"
-  (car (split-colon string)))
+  (if (< 1 (length (split-colon-and-reverse string)))
+      (car (split-colon-and-reverse string))
+      nil))
+
+(defun before-last-colon (string)
+  "returns the text before the last colon in a string"
+  (subseq string 0 (search (concatenate 'string ":" (after-last-colon string)) string)))
+
+(defun split-last-colon (string)
+  "returns a plist cointaining the portions of the string before and after the last colon"
+  (list :before-colon (before-last-colon string)
+	:after-colon (after-last-colon string)))
 
 (defun strip-empty-strings (string-list)
   (remove-if #'(lambda (string) (string= string "")) string-list))
@@ -35,7 +46,7 @@
   (let ((colon-list nil))
     (dolist (y (do-semicolon l))
       (dolist (z y)
-        (push (strip-empty-strings (reverse(split-colon-and-reverse z))) colon-list)))
+        (push (split-last-colon z) colon-list)))
     (reverse colon-list)))
 
 (print (do-colon (read-file "default.cwp")))
