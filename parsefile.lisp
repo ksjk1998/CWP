@@ -12,7 +12,8 @@
     (reverse string-list)))
 (defun strip-empty-strings (string-list)
   (remove-if #'(lambda (string) (string= string "")) string-list))
-(print (strip-empty-strings
- (split-semicolon
-	"one-more; \nand-another; and-another-rule; yet-another-rule; another-rule; rule;")))
+(print (let ((newlist nil))
+     (dolist (x (read-file "default.cwp"))
+            (push (strip-empty-strings (split-semicolon x)) newlist))
+          newlist))
 (quit)
