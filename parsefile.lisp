@@ -14,7 +14,7 @@
   "splits a string at every colon and returns a reversed list of results"
   (let ((string-list ()))
     (dolist (x (split-sequence:split-sequence #\: string))
-      (setq string-list (cons (string-trim *whitespace* x) string-list)))
+      (setq string-list (cons x string-list)))
     string-list))
 
 (defun after-last-colon (string)
@@ -29,8 +29,8 @@
 
 (defun split-last-colon (string)
   "returns a plist cointaining the portions of the string before and after the last colon"
-  (list :before-colon (before-last-colon string)
-	:after-colon (after-last-colon string)))
+  (list :before-colon (string-trim *whitespace* (before-last-colon string))
+	:after-colon (string-trim *whitespace* (after-last-colon string))))
 
 (defun strip-empty-strings (string-list)
   (remove-if #'(lambda (string) (string= string "")) string-list))
@@ -46,7 +46,9 @@
     (dolist (x (do-semicolon l))
       (push (let ((clist nil))
        (dolist (y x)
-         (push (split-last-colon y) clist)) (reverse clist)) colon-list))
+         (push (split-last-colon y) clist))
+       (reverse clist))
+	    colon-list))
     (reverse colon-list)))
 
 (dolist (x (do-semicolon (read-file "default.cwp")))
@@ -55,4 +57,5 @@
   (print x))
 
 
-(quit)
+;(quit)
+
