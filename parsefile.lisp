@@ -35,18 +35,18 @@
 (defun strip-empty-strings (string-list)
   (remove-if #'(lambda (string) (string= string "")) string-list))
 
-(defun do-semicolon (l)
+(defun do-semicolon (file)
   (let ((rule-list nil))
-    (dolist (x l)
-      (push (strip-empty-strings (split-semicolon x)) rule-list))
+    (dolist (lines file)
+      (push (strip-empty-strings (split-semicolon lines)) rule-list))
     (reverse rule-list)))
 
-(defun do-colon (l)
+(defun do-colon (file)
   (let ((colon-list nil))
-    (dolist (x (do-semicolon l))
+    (dolist (rules (do-semicolon file))
       (push (let ((clist nil))
-       (dolist (y x)
-         (push (split-last-colon y) clist))
+       (dolist (colon-delimiter rules)
+         (push (split-last-colon colon-delimiter) clist))
        (reverse clist))
 	    colon-list))
     (reverse colon-list)))
@@ -57,5 +57,5 @@
   (print x))
 
 
-;(quit)
+(quit)
 
