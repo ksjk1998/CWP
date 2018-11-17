@@ -1,2 +1,51 @@
-h1:"This is a CWP"; br;
-h1:"CWP stands for Cascading Web Pages";
+h1.class#id:"This is a CWP"; br;
+h1.desc.#desc:"CWP stands for Cascading Web Pages";
+text-align: center;
+color: red;
+h1 , h2 > h3 < h4 {
+}
+/* This is a single-line comment */
+background-color:DodgerBlue;
+color:Tomato;
+border: 2px solid Tomato;
+background-color:rgb(255, 99, 71);
+background-color:#ff6347;
+background-color:hsl(9, 100%, 64%);
+background-color:rgba(255, 99, 71, 0.5);
+background-color:hsla(9, 100%, 64%, 0.5);
+body {
+	    background-color: lightblue;
+}
+h1 {
+	    background-color: green;
+}
+
+div {
+	    background-color: lightblue;
+}
+
+p {
+	    background-color: yellow;
+}
+body {
+	    background-image: url("paper.gif");
+	    background-repeat: repeat-x;
+	    background-position: right top;
+	    margin-right: 200px;
+}
+border-style: solid;
+border-width: 5px;
+margin: 25px 50px 75px 100px;
+padding: 25px 50px 75px 100px;
+height: 100px;
+width: 500px;
+font-size:100%;
+font-family: "Times New Roman", Times, serif;
+font: 15px arial, sans-serif;
+a:link {
+	    color: red;
+}
+@keyframes example {
+	from {background-color: red;}
+	to {background-color: yellow;}
+}

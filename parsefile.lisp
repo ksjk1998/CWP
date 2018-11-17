@@ -1,6 +1,5 @@
 (load "split-sequence.lisp")
 (load "writefile.lisp")
-(print (read-file "default.cwp"))
 (defvar *whitespace* '(#\space #\newline #\backspace
 		       #\tab #\rubout #\linefeed
 		       #\page #\return))
@@ -47,13 +46,9 @@
     (dolist (x (do-semicolon l))
       (push (let ((clist nil))
        (dolist (y x)
-         (push (split-last-colon y) clist)) clist) colon-list)
-    )(reverse colon-list)))
+         (push (split-last-colon y) clist)) clist) colon-list))
+    (reverse colon-list)))
 
-(print (do-semicolon (read-file "default.cwp")))
-(dolist (i (do-semicolon (read-file "default.cwp")))
-  (dolist (j i)
-    (print j)))
 (print (do-colon (read-file "default.cwp")))
 
 (quit)
