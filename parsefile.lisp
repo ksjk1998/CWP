@@ -46,9 +46,13 @@
     (dolist (x (do-semicolon l))
       (push (let ((clist nil))
        (dolist (y x)
-         (push (split-last-colon y) clist)) clist) colon-list))
+         (push (split-last-colon y) clist)) (reverse clist)) colon-list))
     (reverse colon-list)))
 
-(print (do-colon (read-file "default.cwp")))
+(dolist (x (do-semicolon (read-file "default.cwp")))
+  (print x))
+(dolist (x (do-colon (read-file "default.cwp")))
+  (print x))
+
 
 (quit)
