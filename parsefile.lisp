@@ -29,8 +29,13 @@
 
 (defun split-last-colon (string)
   "returns a plist cointaining the portions of the string before and after the last colon"
-  (list :before-colon (string-trim *whitespace* (before-last-colon string))
-	:after-colon (string-trim *whitespace* (after-last-colon string))))
+  (let ((colon-list (list :before-colon (string-trim *whitespace* (before-last-colon string))
+			 :after-colon (string-trim *whitespace* (after-last-colon string)))))
+    (when (string-equal (getf colon-list :after-colon) "NIL")
+      (setf (getf colon-list :after-colon) nil))
+    (when (string-equal (getf colon-list :before-colon) "NIL")
+      (setf (getf colon-list :before-colon) nil))
+    colon-list))
 
 (defun strip-empty-strings (string-list)
   (remove-if #'(lambda (string) (string= string "")) string-list))
@@ -57,5 +62,5 @@
   (print x))
 
 
-(quit)
+;(quit)
 
