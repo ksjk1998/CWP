@@ -1,5 +1,6 @@
 (load "split-sequence.lisp")
 (load "writefile.lisp")
+(load "CWP-objects")
 (defvar *whitespace* '(#\space #\newline #\backspace
 		       #\tab #\rubout #\linefeed
 		       #\page #\return))
